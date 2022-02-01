@@ -34,7 +34,7 @@ export default class OpensearchService {
   search = async (context, req, res) => {
     try {
       const { query, index, size } = req.body;
-      const params = { index, size, body: query };
+      const params = { index, size, body: query, track_total_hits: true };
       const { callAsCurrentUser } = this.esDriver.asScoped(req);
       const results = await callAsCurrentUser('search', params);
       return res.ok({
