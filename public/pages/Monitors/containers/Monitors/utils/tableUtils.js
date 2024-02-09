@@ -9,6 +9,7 @@ import moment from 'moment';
 import { DEFAULT_EMPTY_DATA, MONITOR_TYPE } from '../../../../../utils/constants';
 import { PLUGIN_NAME } from '../../../../../../utils/constants';
 import { getItemLevelType } from './helpers';
+import { IncontextInsightComponent } from './../../../../../plugin';
 
 const renderTime = (time) => {
   const momentTime = moment(time);
@@ -43,7 +44,11 @@ export const columns = [
     name: 'Type',
     sortable: false,
     truncateText: false,
-    render: (item_type) => getItemLevelType(item_type),
+    render: (item_type) => (
+      <IncontextInsightComponent>
+        <span key={`type_${item_type}`}>{getItemLevelType(item_type)}</span>
+      </IncontextInsightComponent>
+    ),
   },
   {
     field: 'latestAlert',
